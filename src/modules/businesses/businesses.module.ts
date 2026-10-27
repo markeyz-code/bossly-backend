@@ -1,0 +1,25 @@
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { BusinessesController } from './businesses.controller';
+import { BusinessesService } from './businesses.service';
+import { Business, BusinessSchema } from './business.schema';
+import { Membership, MembershipSchema } from '../memberships/membership.schema';
+import { User, UserSchema } from '../users/user.schema';
+import { Product, ProductSchema } from '../products/product.schema';
+import { Order, OrderSchema } from '../orders/order.schema';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([
+      { name: Business.name, schema: BusinessSchema },
+      { name: Membership.name, schema: MembershipSchema },
+      { name: User.name, schema: UserSchema },
+      { name: Product.name, schema: ProductSchema },
+      { name: Order.name, schema: OrderSchema },
+    ]),
+  ],
+  controllers: [BusinessesController],
+  providers: [BusinessesService],
+  exports: [BusinessesService],
+})
+export class BusinessesModule {}

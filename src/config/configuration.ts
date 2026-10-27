@@ -1,0 +1,87 @@
+export interface AppConfig {
+  env: string;
+  port: number;
+  appUrl: string;
+  adminUrl: string;
+  apiUrl: string;
+  publicRootDomain: string;
+  allowedOrigins: string[];
+  mongodbUri: string;
+  redisUrl?: string;
+  jwt: {
+    accessSecret: string;
+    refreshSecret: string;
+    accessTtl: string;
+    refreshTtl: string;
+  };
+  cloudinary: {
+    cloudName?: string;
+    apiKey?: string;
+    apiSecret?: string;
+    folder: string;
+  };
+  resend: { apiKey?: string; from: string; replyTo?: string };
+  paystack: { secretKey?: string; publicKey?: string; webhookSecret?: string };
+  whatsapp: {
+    phoneNumberId?: string;
+    businessAccountId?: string;
+    accessToken?: string;
+    verifyToken: string;
+    appSecret?: string;
+    platformNumber?: string;
+  };
+  llm: { apiKey?: string; baseUrl: string; model: string };
+  seed: { email?: string; password?: string };
+}
+
+export default (): AppConfig => ({
+  env: process.env.NODE_ENV || 'development',
+  port: Number(process.env.PORT || 4100),
+  appUrl: process.env.APP_URL || 'http://localhost:3100',
+  adminUrl: process.env.ADMIN_URL || 'http://localhost:3101',
+  apiUrl: process.env.API_URL || 'http://localhost:4100/api/v1',
+  publicRootDomain: process.env.PUBLIC_ROOT_DOMAIN || 'bossly.ng',
+  allowedOrigins: (process.env.ALLOWED_ORIGINS || 'http://localhost:3100,http://localhost:3101')
+    .split(',').map((s) => s.trim()).filter(Boolean),
+  mongodbUri: process.env.MONGODB_URI as string,
+  redisUrl: process.env.REDIS_URL,
+  jwt: {
+    accessSecret: process.env.JWT_ACCESS_SECRET as string,
+    refreshSecret: process.env.JWT_REFRESH_SECRET as string,
+    accessTtl: process.env.JWT_ACCESS_TTL || '15m',
+    refreshTtl: process.env.JWT_REFRESH_TTL || '30d',
+  },
+  cloudinary: {
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+    folder: process.env.CLOUDINARY_FOLDER || 'bossly',
+  },
+  resend: {
+    apiKey: process.env.RESEND_API_KEY,
+    from: process.env.MAIL_FROM || 'Bossly <hello@bossly.ng>',
+    replyTo: process.env.MAIL_REPLY_TO,
+  },
+  paystack: {
+    secretKey: process.env.PAYSTACK_SECRET_KEY,
+    publicKey: process.env.PAYSTACK_PUBLIC_KEY,
+    webhookSecret: process.env.PAYSTACK_WEBHOOK_SECRET,
+  },
+  whatsapp: {
+    phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID,
+    businessAccountId: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID,
+    accessToken: process.env.WHATSAPP_ACCESS_TOKEN,
+    verifyToken: process.env.WHATSAPP_VERIFY_TOKEN || 'bossly-webhook-verify',
+    appSecret: process.env.WHATSAPP_APP_SECRET,
+    platformNumber: process.env.WHATSAPP_PLATFORM_NUMBER,
+  },
+  llm: {
+    apiKey: process.env.LLM_API_KEY,
+    baseUrl: process.env.LLM_BASE_URL || 'https://api.openai.com/v1',
+    model: process.env.LLM_MODEL || 'gpt-4o-mini',
+  },
+  seed: {
+    email: process.env.SEED_SUPER_ADMIN_EMAIL,
+    password: process.env.SEED_SUPER_ADMIN_PASSWORD,
+  },
+});

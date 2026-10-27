@@ -1,0 +1,41 @@
+export const PERMISSIONS = {
+  PRODUCTS_READ: 'products:read',
+  PRODUCTS_WRITE: 'products:write',
+  STOCK_READ: 'stock:read',
+  STOCK_WRITE: 'stock:write',
+  ORDERS_READ: 'orders:read',
+  ORDERS_WRITE: 'orders:write',
+  SALES_READ: 'sales:read',
+  SALES_WRITE: 'sales:write',
+  CUSTOMERS_READ: 'customers:read',
+  CUSTOMERS_WRITE: 'customers:write',
+  DEBTS_READ: 'debts:read',
+  DEBTS_WRITE: 'debts:write',
+  EXPENSES_READ: 'expenses:read',
+  EXPENSES_WRITE: 'expenses:write',
+  REPORTS_READ: 'reports:read',
+  WEBSITE_MANAGE: 'website:manage',
+  SETTINGS_MANAGE: 'settings:manage',
+  STAFF_MANAGE: 'staff:manage',
+  PAYMENTS_MANAGE: 'payments:manage',
+  WHATSAPP_MANAGE: 'whatsapp:manage',
+} as const;
+
+export const STAFF_DEFAULT_PERMISSIONS: string[] = [
+  PERMISSIONS.PRODUCTS_READ,
+  PERMISSIONS.PRODUCTS_WRITE,
+  PERMISSIONS.STOCK_READ,
+  PERMISSIONS.STOCK_WRITE,
+  PERMISSIONS.ORDERS_READ,
+  PERMISSIONS.ORDERS_WRITE,
+  PERMISSIONS.SALES_READ,
+  PERMISSIONS.SALES_WRITE,
+  PERMISSIONS.CUSTOMERS_READ,
+  PERMISSIONS.CUSTOMERS_WRITE,
+  PERMISSIONS.DEBTS_READ,
+  PERMISSIONS.DEBTS_WRITE,
+  PERMISSIONS.EXPENSES_READ,
+  PERMISSIONS.EXPENSES_WRITE,
+];
+
+export const ALL_PERMISSIONS = Object.values(PERMISSIONS);
